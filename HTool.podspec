@@ -16,7 +16,7 @@ s.author             = { "hare27" => "hare27@foxmail.com" }
 
 s.platform     = :ios
 
-s.source       = { :git => "https://github.com/hare27/hare27/HTool.git", :tag => "0.0.1" }
+s.source       = { :git => "https://github.com/hare27/HTool.git", :tag => "0.0.1" }
 
 s.source_files  = "HTool", "HTool/**/*.{h,m}"
 
