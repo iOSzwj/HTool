@@ -8,6 +8,9 @@
 
 #import "HPropertyTool.h"
 
+#warning 使用前，先修改下这里的路径
+#define kLocationPath @"/Users/hare27/Desktop/propertyFile"
+
 @interface HPropertyTool()
 
 /** 用于保存所有字典的字典*/
@@ -49,7 +52,7 @@
         return;
     }
     // 保存到本地
-    [tool saveDict:tool.dict_all ToPath:@"/Users/hare27/Desktop/propertyFile"];
+    [tool saveDict:tool.dict_all ToPath:kLocationPath];
     
 }
 
