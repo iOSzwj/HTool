@@ -10,10 +10,10 @@
 
 @interface HPropertyTool : NSObject
 
-/** 生成json的.h文件*/
-+(void)getFileForJson:(id)json;
-
 /** 讲字典转换成用于创建文件的字符串，并打印出来*/
 +(void)logPropertyForDict:(NSDictionary *)dict;
+
+/** 生成json的.h文件*/
++(void)getFileForJson:(id)json;
 
 @end

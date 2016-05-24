@@ -23,11 +23,18 @@
 
 #pragma mark - 方法 Methods
 
+/** 讲字典转换成用于创建文件的字符串，并打印出来*/
++(void)logPropertyForDict:(NSDictionary *)dict{
+    NSLog(@"%@",[[self new] getPropertyString:dict]);
+    
+}
+
+/** 生成json的.h文件*/
 +(void)getFileForJson:(id)json{
     
     HPropertyTool *tool = [HPropertyTool new];
     
-    // 获取首页的字符串
+    // 如果是字典
     if ([json isKindOfClass:[NSDictionary class]] ) {
         tool.dict_all[@"index"] = [NSMutableDictionary dictionaryWithDictionary:json];
         [tool getAllDictForDict:json];
@@ -38,20 +45,47 @@
             tool.dict_all[@"index"] = dict_m;
             [tool getAllDictForDict:dict_m];
         }
+    }else{
+        return;
     }
+    // 保存到本地
+    [tool saveDict:tool.dict_all ToPath:@"/Users/hare27/Desktop/propertyFile"];
     
+}
+
+/** 保存到本地*/
+-(void)saveDict:(NSDictionary<NSString *, NSDictionary *> *)dict ToPath:(NSString *)path{
     __block NSInteger count = 0;
     
     // 遍历所有字典，写进文件
-    [tool.dict_all enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
-        NSString *propertyString = [tool getPropertyString:obj];
-        [propertyString writeToFile:[NSString stringWithFormat:@"/Users/hare27/Desktop/propertyFile/%@.text",key] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        count ++;
+    [dict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
+        
+        NSError *error;
+        
+        // 判断该路劲是否存在，不存在就创建
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:path] == NO) {
+            [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+            if (error) {
+                NSLog(@"%s文件夹创建失败:%@ %@",__func__,error,error.userInfo);
+                return;
+            }
+        }
+        
+        // 写到文件中
+        NSString *propertyString = [self getPropertyString:obj];
+        [propertyString writeToFile:[NSString stringWithFormat:@"%@/%@.text",path,key] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        if (error) {
+            NSLog(@"%@写入失败:%@ %@",key,error,error.userInfo);
+        }else{
+            count ++;
+        }
     }];
     
     NSLog(@"成功生成%ld个文件",count);
 }
 
+/** 获取所有的字典*/
 -(void)getAllDictForDict:(NSDictionary *)dict{
     
     // 如果传进来的不是字典
@@ -61,7 +95,7 @@
         // 如果改元素是字典
         if ([self isDictForJson:obj]) {
             // 添加到self.dict_all
-            [self addDictToAll:obj andKey:key];
+            [self addDictToAll:[NSMutableDictionary dictionaryWithDictionary:obj] andKey:key];
             
             [self getAllDictForDict:obj];
             
@@ -135,12 +169,6 @@
     return NO;
 }
 
-/** 讲字典转换成用于创建文件的字符串，并打印出来*/
-+(void)logPropertyForDict:(NSDictionary *)dict{
-    NSLog(@"%@",[[self new] getPropertyString:dict]);
-    
-}
-
 /** 讲字典转换成用于创建.h文件的字符串*/
 -(NSString *)getPropertyString:(NSDictionary *)dict{
     // 打印所有属性类型名
@@ -164,13 +192,13 @@
         if ([obj isKindOfClass:NSClassFromString(@"__NSCFDictionary")]) {
             type = @"strong";
             className = @"NSDictionary";
-        }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFBoolean")]){
-            type = @"assign";
-            className = @"BOOL";
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSArray0")]){
             type = @"strong";
             className = @"NSArray";
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSArrayM")]){
+            type = @"strong";
+            className = @"NSArray";
+        }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFArray")]){
             type = @"strong";
             className = @"NSArray";
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFNumber")]){
@@ -179,6 +207,9 @@
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFString")]){
             type = @"copy";
             className = @"NSString";
+        }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFBoolean")]){
+            type = @"assign";
+            className = @"BOOL";
         }else{
             NSLog(@"出现了未知类型%@",[obj class]);
             NSAssert1(0, @"出现了未知类型%@",[obj class]);
