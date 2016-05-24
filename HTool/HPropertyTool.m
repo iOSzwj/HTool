@@ -25,7 +25,7 @@
 
 /** 讲字典转换成用于创建文件的字符串，并打印出来*/
 +(void)logPropertyForDict:(NSDictionary *)dict{
-    NSLog(@"%@",[[self new] getPropertyString:dict]);
+    NSLog(@"%@",[[self new] getPropertyString:dict className:nil]);
     
 }
 
@@ -73,8 +73,8 @@
         }
         
         // 写到文件中
-        NSString *propertyString = [self getPropertyString:obj];
-        [propertyString writeToFile:[NSString stringWithFormat:@"%@/%@.text",path,key] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        NSString *propertyString = [self getPropertyString:obj className:key];
+        [propertyString writeToFile:[NSString stringWithFormat:@"%@/%@.h",path,key] atomically:YES encoding:NSUTF8StringEncoding error:&error];
         if (error) {
             NSLog(@"%@写入失败:%@ %@",key,error,error.userInfo);
         }else{
@@ -170,7 +170,7 @@
 }
 
 /** 讲字典转换成用于创建.h文件的字符串*/
--(NSString *)getPropertyString:(NSDictionary *)dict{
+-(NSString *)getPropertyString:(NSDictionary *)dict className:(NSString *)className{
     // 打印所有属性类型名
     //    [propertyM getClassNameForJson:dict];
     //    NSLog(@"%@",propertyM.classNameSet);
@@ -182,7 +182,7 @@
     //    __NSCFNumber,
     //    __NSCFString
     
-    NSMutableString *propertyString = [NSMutableString string];
+    NSMutableString *propertyString = [NSMutableString stringWithFormat:@"@interface %@ : NSObject\n",className];
     
     [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
@@ -222,6 +222,8 @@
         }
         
     }];
+    
+    [propertyString appendString:@"\n@end\n"];
     
     return  [propertyString copy];
 
