@@ -165,6 +165,8 @@
         return YES;
     }else if ([json isKindOfClass:NSClassFromString(@"__NSArray0")]){
         return YES;
+    }else if ([json isKindOfClass:NSClassFromString(@"__NSCFArray")]){
+        return YES;
     }
     return NO;
 }
@@ -179,6 +181,7 @@
     //    __NSCFBoolean,
     //    __NSArray0,
     //    __NSArrayM,
+    //    __NSCFArray
     //    __NSCFNumber,
     //    __NSCFString
     
@@ -189,16 +192,10 @@
         NSString *type;
         NSString *className;
         
-        if ([obj isKindOfClass:NSClassFromString(@"__NSCFDictionary")]) {
+        if ([self isDictForJson:obj]) {
             type = @"strong";
             className = @"NSDictionary";
-        }else if ([obj isKindOfClass:NSClassFromString(@"__NSArray0")]){
-            type = @"strong";
-            className = @"NSArray";
-        }else if ([obj isKindOfClass:NSClassFromString(@"__NSArrayM")]){
-            type = @"strong";
-            className = @"NSArray";
-        }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFArray")]){
+        }else if ([self isArrForJson:obj]){
             type = @"strong";
             className = @"NSArray";
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFNumber")]){
@@ -216,9 +213,9 @@
         }
         
         if ([type isEqualToString:@"assign"]) {
-            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ %@\n",type,className,key];
+            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ %@;\n",type,className,key];
         }else{
-            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ *%@\n",type,className,key];
+            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ *%@;\n",type,className,key];
         }
         
     }];
