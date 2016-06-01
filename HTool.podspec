@@ -6,6 +6,7 @@ s.version      = "0.0.1"
 s.summary      = "工具类"
 
 s.description  = <<-DESC
+自己写的一些工具类
 DESC
 
 s.homepage     = "https://github.com/hare27/HTool"
