@@ -210,6 +210,9 @@
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFBoolean")]){
             type = @"assign";
             className = @"BOOL";
+        }else if ([obj isKindOfClass:NSClassFromString(@"NSTaggedPointerString")]){
+            type = @"copy";
+            className = @"NSString";
         }else{
             NSLog(@"出现了未知类型%@",[obj class]);
             NSAssert1(0, @"出现了未知类型%@",[obj class]);
