@@ -41,7 +41,8 @@
     if ([json isKindOfClass:[NSDictionary class]] ) {
         tool.dict_all[@"index"] = [NSMutableDictionary dictionaryWithDictionary:json];
         [tool getAllDictForDict:json];
-        // 如果是数组
+        
+    // 如果是数组
     }else if ([json isKindOfClass:[NSArray class]]){
         NSMutableDictionary *dict_m = [tool mergeDictFromArr:json];
         if (dict_m) {
@@ -53,6 +54,10 @@
     }
     // 保存到本地
     [tool saveDict:tool.dict_all ToPath:kLocationPath];
+    // 再将json保存到本地
+    if ([json writeToFile:[kLocationPath stringByAppendingPathComponent:@"json.plist"] atomically:YES]) {
+        NSLog(@"%s json文件写入成功",__func__);
+    }
     
 }
 
@@ -102,7 +107,7 @@
             
             [self getAllDictForDict:obj];
             
-        // 如果改元素是数组
+            // 如果改元素是数组
         }else if([self isArrForJson:obj]){
             NSMutableDictionary *dict_m = [self mergeDictFromArr:obj];
             if (dict_m) {
@@ -123,7 +128,7 @@
         
         [self mergeDict:dict_m toTargetDict:self.dict_all[key]];
         
-    // 如果取不到就添加
+        // 如果取不到就添加
     }else{
         self.dict_all[key] = dict_m;
     }
@@ -229,7 +234,7 @@
     [propertyString appendString:@"\n@end\n"];
     
     return  [propertyString copy];
-
+    
 }
 
 /** 获取json里面的所有类型，并保存到self.classNameSet里面*/
@@ -268,10 +273,10 @@
 }
 
 - (NSMutableDictionary *)dict_all {
-	if(_dict_all == nil) {
-		_dict_all = [[NSMutableDictionary alloc] init];
-	}
-	return _dict_all;
+    if(_dict_all == nil) {
+        _dict_all = [[NSMutableDictionary alloc] init];
+    }
+    return _dict_all;
 }
 
 @end
