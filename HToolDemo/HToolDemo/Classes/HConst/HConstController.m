@@ -12,6 +12,7 @@
 
 @interface HConstController ()
 
+
 @end
 
 @implementation HConstController
@@ -23,6 +24,8 @@
     
     // hlog 和 HScreenW 、 HScreenH
     HLog(@"屏幕宽：%lf,屏幕高：%lf",HScreenW,HScreenH);
+    
+    
 }
 
 #pragma mark - UITableViewDataSource

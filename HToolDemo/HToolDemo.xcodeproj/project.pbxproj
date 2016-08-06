@@ -17,6 +17,8 @@
 		B87377441CFA70D3002A5E25 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = B873773F1CFA70D3002A5E25 /* Foundation+Log.m */; };
 		B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B87377421CFA70D3002A5E25 /* HPropertyTool.m */; };
 		B87377471CFA71C3002A5E25 /* status.plist in Resources */ = {isa = PBXBuildFile; fileRef = B87377461CFA71C3002A5E25 /* status.plist */; };
+		B87C4F9A1D55C63E0066BBFF /* HDateTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C4F991D55C63E0066BBFF /* HDateTool.m */; };
+		B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,10 @@
 		B87377421CFA70D3002A5E25 /* HPropertyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPropertyTool.m; sourceTree = "<group>"; };
 		B87377431CFA70D3002A5E25 /* HSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSingleton.h; sourceTree = "<group>"; };
 		B87377461CFA71C3002A5E25 /* status.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = status.plist; sourceTree = "<group>"; };
+		B87C4F981D55C63E0066BBFF /* HDateTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDateTool.h; sourceTree = "<group>"; };
+		B87C4F991D55C63E0066BBFF /* HDateTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDateTool.m; sourceTree = "<group>"; };
+		B87C4F9B1D55C6A80066BBFF /* HDateDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDateDemo.h; sourceTree = "<group>"; };
+		B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDateDemo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 		B87184F21D0E97EF004D464D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B87C4F971D55C6120066BBFF /* HDate */,
 				B87184F31D0E97EF004D464D /* HConst */,
 			);
 			path = Classes;
@@ -119,9 +126,20 @@
 				B87377411CFA70D3002A5E25 /* HPropertyTool.h */,
 				B87377421CFA70D3002A5E25 /* HPropertyTool.m */,
 				B87377431CFA70D3002A5E25 /* HSingleton.h */,
+				B87C4F981D55C63E0066BBFF /* HDateTool.h */,
+				B87C4F991D55C63E0066BBFF /* HDateTool.m */,
 			);
 			name = HTool;
 			path = ../../HTool;
+			sourceTree = "<group>";
+		};
+		B87C4F971D55C6120066BBFF /* HDate */ = {
+			isa = PBXGroup;
+			children = (
+				B87C4F9B1D55C6A80066BBFF /* HDateDemo.h */,
+				B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */,
+			);
+			path = HDate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,11 +214,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B873772C1CFA70AD002A5E25 /* AppDelegate.m in Sources */,
+				B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */,
 				B87377291CFA70AD002A5E25 /* main.m in Sources */,
 				B87184F61D0E980F004D464D /* HConstController.m in Sources */,
 				B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */,
 				B87184F91D0E98D4004D464D /* HConstCell.m in Sources */,
 				B87377441CFA70D3002A5E25 /* Foundation+Log.m in Sources */,
+				B87C4F9A1D55C63E0066BBFF /* HDateTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
