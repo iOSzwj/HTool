@@ -39,7 +39,7 @@
  *  例如：刚刚/5分钟前/5小时前/昨天/多少天前/11月12/2014年11月
  *  昨天23：59分显示为多少小时前或多少分钟前
  */
--(NSString *)detailStringSinceNowForDate:(NSDate *)date;
+-(NSString *)getDetailStringSinceNowForDate:(NSDate *)date;
 
 
 @end
