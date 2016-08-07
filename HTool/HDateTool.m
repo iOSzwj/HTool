@@ -45,7 +45,29 @@
     &&cmps_now.day == cmps_date.day;
 }
 
+/** 判断一个日期是否昨天*/
+-(BOOL)dateIsYesterDayForDate:(NSDate *)date{
+    NSDate *now = [NSDate date];
+    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents *cmps_date = [self.calendar components:unit fromDate:date];
+    NSDateComponents *cmps_now = [self.calendar components:unit fromDate:now];
+    
+    if (cmps_now.day == 1) {
+        // 前一天
+        now = [NSDate dateWithTimeIntervalSinceNow:-60*60*24];
+        cmps_now = [self.calendar components:unit fromDate:now];
+        
+        return cmps_now.year == cmps_date.year
+        && cmps_now.month == cmps_date.month
+        && cmps_now.day == cmps_date.day;
+        
+    }else{
+        return cmps_now.year == cmps_date.year
+        && cmps_now.month == cmps_date.month
+        && cmps_now.day - cmps_date.day == 1;
+    }
 
+}
 
 /** 根据样式，获取date对应的字符串*/
 -(NSString *)getStringWithFormat:(NSString *)format FromeDate:(NSDate *)date{
@@ -75,19 +97,20 @@
  */
 -(NSString *)getStringSinceNowForDate:(NSDate *)date{
     
+    NSDate *date_temp = [NSDate date];
+    
     NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     NSDateComponents *cmps_date = [self.calendar components:unit fromDate:date];
-    NSDate *date_temp = [NSDate date];
     NSDateComponents *cmps_now = [self.calendar components:unit fromDate:date_temp];
     
-    if (cmps_now.year != cmps_date.year) {
+    if ([self dateIsYesterDayForDate:date]) {
+        return [NSString stringWithFormat:@"昨天%d点%d分",(int)cmps_date.hour,(int)cmps_date.minute];
+    }else if (cmps_now.year != cmps_date.year) {
         return [NSString stringWithFormat:@"%d年%d月%d日",(int)cmps_date.year,(int)cmps_date.month,(int)cmps_date.day];
     }else if(cmps_now.month != cmps_date.month) {
         return [NSString stringWithFormat:@"%d月%d日%d点",(int)cmps_date.month,(int)cmps_date.day,(int)cmps_date.hour];
     }else if(cmps_now.day - cmps_date.day > 1) {
         return [NSString stringWithFormat:@"%d月%d日%d点",(int)cmps_date.month,(int)cmps_date.day,(int)cmps_date.hour];
-    }else if(cmps_now.day - cmps_date.day == 1) {
-        return [NSString stringWithFormat:@"昨天%d点%d分",(int)cmps_date.hour,(int)cmps_date.minute];
     }else if(cmps_now.day - cmps_date.day < 0) {
         return @"系统时间错误";
     }

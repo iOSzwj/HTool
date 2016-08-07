@@ -19,6 +19,9 @@
 /** 判断一个日期是否今天*/
 -(BOOL)dateIsThisDayForDate:(NSDate *)date;
 
+/** 判断一个日期是否昨天*/
+-(BOOL)dateIsYesterDayForDate:(NSDate *)date;
+
 
 /** 根据样式，获取字符串对应的date*/
 -(NSDate *)getDateWithFormat:(NSString *)format Frome:(NSString *)str;
