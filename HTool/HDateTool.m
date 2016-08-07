@@ -18,6 +18,15 @@
 
 @implementation HDateTool
 
++(instancetype)sharedDateTool{
+    static HDateTool *obj;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        obj=[[self alloc]init];
+    });
+    return obj;
+}
+
 /** 判断一个日期是否今年*/
 -(BOOL)dateIsThisYearForDate:(NSDate *)date{
     NSCalendarUnit unit = NSCalendarUnitYear;

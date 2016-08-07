@@ -10,6 +10,8 @@
 
 @interface HDateTool : NSObject
 
++(instancetype)sharedDateTool;
+
 /** 判断一个日期是否今年*/
 -(BOOL)dateIsThisYearForDate:(NSDate *)date;
 
