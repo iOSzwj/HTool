@@ -8,33 +8,15 @@
 
 #import "HDateTool.h"
 
-
-#define kMinute_count 60
-#define kHour_count kMinute_count*60
-#define kDay_count kHour_count*24
-#define kMonth_count kDay_count*30
-
 @interface HDateTool()
 
+@property(nonatomic,strong)NSDateFormatter *dateFormatter;
+
 @property(nonatomic,strong)NSCalendar *calendar;
-
-@property(nonatomic,strong)NSDateFormatter *fmt;
-
-@property(nonatomic,copy)NSString *dateFormat;
 
 @end
 
 @implementation HDateTool
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.dateFormatType = HDateFormatTypeYMDHms1;
-        self.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-    }
-    return self;
-}
 
 /** 判断一个日期是否今年*/
 -(BOOL)dateIsThisYearForDate:(NSDate *)date{
@@ -63,75 +45,28 @@
     &&cmps_now.day == cmps_date.day;
 }
 
-/** 根据你一个HDateFormatType给NSDateFormatter设置dateFormat属性*/
--(void)setDateFormatr:(NSDateFormatter *)fmt andType:(HDateFormatType)type{
-    
-    if (fmt == nil) {
-        return;
-    }
-    
-    switch (type) {
-        case HDateFormatTypeYMDHms1:{
-            fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        }
-            break;
-        case HDateFormatTypeYMDHms2:{
-            fmt.dateFormat = @"yyyy年MM月dd日 HH时mm分ss秒";
-        }
-            break;
-        case HDateFormatTypeYMD1:{
-            fmt.dateFormat = @"yyyy-MM-dd";
-        }
-            break;
-        case HDateFormatTypeYMD2:{
-            fmt.dateFormat = @"yyyy年MM月dd日";
-        }
-            break;
-        case HDateFormatTypeMD1:{
-            fmt.dateFormat = @"MM-dd";
-        }
-            break;
-        case HDateFormatTypeMD2:{
-            fmt.dateFormat = @"MM月dd日";
-        }
-            break;
-        case HDateFormatTypeHms1:{
-            fmt.dateFormat = @"HH:mm:ss";
-        }
-            break;
-        case HDateFormatTypeHms2:{
-            fmt.dateFormat = @"HH时mm分ss秒";
-        }
-            break;
-    }
-}
 
-/** 根据时间样式，获取dateformatter对象*/
--(NSDateFormatter *)dateFormatWithType:(HDateFormatType)fmtType{
-    
-    NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
-    [self setDateFormatr:fmt andType:fmtType];
-    return fmt;
-}
 
-/** 根据时间样式，获取date对应的字符串*/
--(NSString *)getStringWithType:(HDateFormatType)fmtType FromeDate:(NSDate *)date{
-    if (date) {
-        self.dateFormatType = fmtType;
-        return [self.fmt stringFromDate:date];
-    }else{
-        return nil;
-    }
-}
 /** 根据样式，获取date对应的字符串*/
 -(NSString *)getStringWithFormat:(NSString *)format FromeDate:(NSDate *)date{
-    if (date) {
-        self.dateFormat = format;
-        return [self.fmt stringFromDate:date];
-    }else{
+    if (date == nil || format == nil || format.length == 0) {
         return nil;
+    }else{
+        self.dateFormatter.dateFormat = format;
+        return [self.dateFormatter stringFromDate:date];
     }
 }
+
+
+/** 根据样式，获取字符串对应的date*/
+-(NSDate *)getDateWithFormat:(NSString *)format Frome:(NSString *)str{
+    if (format == nil || format.length == 0 || str == nil || str.length == 0) {
+        return nil;
+    }
+    self.dateFormatter.dateFormat = format;
+    return [self.dateFormatter dateFromString:str];
+}
+
 
 /**
  *  获取一个时间距离现在的时间描述
@@ -188,15 +123,6 @@
 }
 
 
--(void)setDateFormatType:(HDateFormatType)dateFormatType{
-    _dateFormatType = dateFormatType;
-    [self setDateFormatr:self.fmt andType:dateFormatType];
-}
-
--(void)setDateFormat:(NSString *)dateFormat{
-    self.fmt.dateFormat = dateFormat;
-}
-
 - (NSCalendar *)calendar {
 	if(_calendar == nil) {
         if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
@@ -208,11 +134,10 @@
 	return _calendar;
 }
 
-- (NSDateFormatter *)fmt {
-	if(_fmt == nil) {
-		_fmt = [[NSDateFormatter alloc] init];
-        _fmt.dateFormat = self.dateFormat;
+- (NSDateFormatter *)dateFormatter {
+	if(_dateFormatter == nil) {
+		_dateFormatter = [[NSDateFormatter alloc] init];
 	}
-	return _fmt;
+	return _dateFormatter;
 }
 @end

@@ -8,22 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum : NSUInteger {
-    HDateFormatTypeYMDHms1,// yyyy-MM-dd HH:mm:ss
-    HDateFormatTypeYMDHms2,// yyyy年MM月dd日 HH时mm分ss秒
-    HDateFormatTypeYMD1,// yyyy-MM-dd
-    HDateFormatTypeYMD2,// yyyy年MM月dd日
-    HDateFormatTypeMD1,// MM-dd
-    HDateFormatTypeMD2,// MM月dd日
-    HDateFormatTypeHms1,// HH:mm:ss
-    HDateFormatTypeHms2,// HH时mm分ss秒
-} HDateFormatType;
-
 @interface HDateTool : NSObject
-
-
-@property(nonatomic,assign)HDateFormatType dateFormatType;
-
 
 /** 判断一个日期是否今年*/
 -(BOOL)dateIsThisYearForDate:(NSDate *)date;
@@ -35,14 +20,10 @@ typedef enum : NSUInteger {
 -(BOOL)dateIsThisDayForDate:(NSDate *)date;
 
 
-/** 根据你一个HDateFormatType给NSDateFormatter设置dateFormat属性*/
--(void)setDateFormatr:(NSDateFormatter *)fmt andType:(HDateFormatType)type;
-/** 根据时间样式，获取dateformatter对象*/
--(NSDateFormatter *)dateFormatWithType:(HDateFormatType)fmtType;
+/** 根据样式，获取字符串对应的date*/
+-(NSDate *)getDateWithFormat:(NSString *)format Frome:(NSString *)str;
 
 
-/** 根据时间样式，获取date对应的字符串*/
--(NSString *)getStringWithType:(HDateFormatType)fmtType FromeDate:(NSDate *)date;
 /** 根据样式，获取date对应的字符串*/
 -(NSString *)getStringWithFormat:(NSString *)format FromeDate:(NSDate *)date;
 

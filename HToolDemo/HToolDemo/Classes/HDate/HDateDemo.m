@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%@",[self.dateTool getStringWithType:0 FromeDate:[NSDate date]]);
+    NSLog(@"%@",[self.dateTool getStringWithFormat:@"yyyy-MM-dd" FromeDate:[NSDate date]]);
     
 }
 
