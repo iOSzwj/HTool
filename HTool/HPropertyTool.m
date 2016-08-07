@@ -65,7 +65,7 @@
         [json enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             
             if ([self isDictForJson:obj]) {
-                dict[key] = @"dict";
+                dict[key] = [NSDictionary dictionary];
                 [self addDictToAll:obj andKey:key];
             }else if ([self isArrForJson:obj]) {
                 [self addArrToAll:obj andKey:key];
