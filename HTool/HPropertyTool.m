@@ -38,17 +38,11 @@
     HPropertyTool *tool = [HPropertyTool new];
     
     // 如果是字典
-    if ([json isKindOfClass:[NSDictionary class]] ) {
-        tool.dict_all[@"index"] = [NSMutableDictionary dictionaryWithDictionary:json];
-        [tool getAllDictForDict:json];
-        
-    // 如果是数组
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        [tool addDictToAll:json andKey:@"index"];
+        // 如果是数组
     }else if ([json isKindOfClass:[NSArray class]]){
-        NSMutableDictionary *dict_m = [tool mergeDictFromArr:json];
-        if (dict_m) {
-            tool.dict_all[@"index"] = dict_m;
-            [tool getAllDictForDict:dict_m];
-        }
+        [tool addArrToAll:json andKey:@"index"];
     }else{
         return;
     }
@@ -60,6 +54,60 @@
     }
     
 }
+
+/** 添加一个字典到self.dict_all*/
+-(void)addDictToAll:(NSDictionary *)json andKey:(NSString *)key{
+    
+    NSMutableDictionary *dict = self.dict_all[key];
+    
+    if (dict) {
+        
+        [json enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            if ([self isDictForJson:obj]) {
+                dict[key] = @"dict";
+                [self addDictToAll:obj andKey:key];
+            }else if ([self isArrForJson:obj]) {
+                [self addArrToAll:obj andKey:key];
+            }else{
+                dict[key] = obj;
+            }
+        }];
+        
+    }else{
+        
+        dict = [NSMutableDictionary new];
+        
+        [json enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            if ([self isDictForJson:obj]) {
+                dict[key] = [NSDictionary dictionary];
+                [self addDictToAll:obj andKey:key];
+            }else if ([self isArrForJson:obj]) {
+                dict[key] = [NSArray array];
+                [self addArrToAll:obj andKey:key];
+            }else{
+                dict[key] = obj;
+            }
+        }];
+        
+        self.dict_all[key] = dict;
+    }
+}
+
+/** 添加数组中的字典到self.dict_all*/
+-(void)addArrToAll:(NSArray *)arr andKey:(NSString *)key{
+    
+    if (arr.count) {
+        
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([self isDictForJson:obj]) {
+                [self addDictToAll:obj andKey:key];
+            }
+        }];
+    }
+}
+
 
 /** 保存到本地*/
 -(void)saveDict:(NSDictionary<NSString *, NSDictionary *> *)dict ToPath:(NSString *)path{
@@ -93,67 +141,6 @@
     NSLog(@"成功生成%ld个文件",count);
 }
 
-/** 获取所有的字典*/
--(void)getAllDictForDict:(NSDictionary *)dict{
-    
-    // 如果传进来的不是字典
-    if ([self isDictForJson:dict] == NO) {return;}
-    
-    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        // 如果改元素是字典
-        if ([self isDictForJson:obj]) {
-            // 添加到self.dict_all
-            [self addDictToAll:[NSMutableDictionary dictionaryWithDictionary:obj] andKey:key];
-            
-            [self getAllDictForDict:obj];
-            
-            // 如果改元素是数组
-        }else if([self isArrForJson:obj]){
-            NSMutableDictionary *dict_m = [self mergeDictFromArr:obj];
-            if (dict_m) {
-                
-                // 添加到self.dict_all
-                [self addDictToAll:dict_m andKey:key];
-                
-                [self getAllDictForDict:dict_m];
-            }
-        }
-    }];
-}
-
-/** 添加一个字典到self.dict_all*/
--(void)addDictToAll:(NSMutableDictionary *)dict_m andKey:(NSString *)key{
-    // 先取，取的到就合并
-    if (self.dict_all[key]) {
-        
-        [self mergeDict:dict_m toTargetDict:self.dict_all[key]];
-        
-        // 如果取不到就添加
-    }else{
-        self.dict_all[key] = dict_m;
-    }
-}
-
-/** 合并两个字典*/
--(void)mergeDict:(NSDictionary *)dict toTargetDict:(NSMutableDictionary *)target{
-    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        target[key] = obj;
-    }];
-}
-
-/** 合并数组中的字典*/
--(NSMutableDictionary *)mergeDictFromArr:(NSArray *)arr{
-    // 获取里面的字典，并合并成一个
-    NSMutableDictionary *dict_m = [NSMutableDictionary dictionary];
-    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([self isDictForJson:obj]) {
-            // 合并
-            [self mergeDict:obj toTargetDict:dict_m];
-        }
-    }];
-    
-    return dict_m.allKeys ? dict_m : nil;
-}
 
 /** 判断一个对象是否是字典类型*/
 -(BOOL)isDictForJson:(id)json{

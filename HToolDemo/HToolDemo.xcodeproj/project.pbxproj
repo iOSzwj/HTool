@@ -19,6 +19,8 @@
 		B87377471CFA71C3002A5E25 /* status.plist in Resources */ = {isa = PBXBuildFile; fileRef = B87377461CFA71C3002A5E25 /* status.plist */; };
 		B87C4F9A1D55C63E0066BBFF /* HDateTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C4F991D55C63E0066BBFF /* HDateTool.m */; };
 		B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */; };
+		B8BF83ED1D56EB1A0053E9A5 /* HPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BF83EC1D56EB1A0053E9A5 /* HPropertyVC.m */; };
+		B8BF83EF1D56EB400053E9A5 /* json.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8BF83EE1D56EB400053E9A5 /* json.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,9 @@
 		B87C4F991D55C63E0066BBFF /* HDateTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDateTool.m; sourceTree = "<group>"; };
 		B87C4F9B1D55C6A80066BBFF /* HDateDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDateDemo.h; sourceTree = "<group>"; };
 		B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDateDemo.m; sourceTree = "<group>"; };
+		B8BF83EB1D56EB1A0053E9A5 /* HPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPropertyVC.h; sourceTree = "<group>"; };
+		B8BF83EC1D56EB1A0053E9A5 /* HPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPropertyVC.m; sourceTree = "<group>"; };
+		B8BF83EE1D56EB400053E9A5 /* json.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = json.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +65,7 @@
 		B87184F21D0E97EF004D464D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B8BF83EA1D56EAFD0053E9A5 /* HProperty */,
 				B87C4F971D55C6120066BBFF /* HDate */,
 				B87184F31D0E97EF004D464D /* HConst */,
 			);
@@ -142,6 +148,16 @@
 			path = HDate;
 			sourceTree = "<group>";
 		};
+		B8BF83EA1D56EAFD0053E9A5 /* HProperty */ = {
+			isa = PBXGroup;
+			children = (
+				B8BF83EE1D56EB400053E9A5 /* json.plist */,
+				B8BF83EB1D56EB1A0053E9A5 /* HPropertyVC.h */,
+				B8BF83EC1D56EB1A0053E9A5 /* HPropertyVC.m */,
+			);
+			name = HProperty;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -201,6 +217,7 @@
 			files = (
 				B87377371CFA70AD002A5E25 /* LaunchScreen.storyboard in Resources */,
 				B87377341CFA70AD002A5E25 /* Assets.xcassets in Resources */,
+				B8BF83EF1D56EB400053E9A5 /* json.plist in Resources */,
 				B87377471CFA71C3002A5E25 /* status.plist in Resources */,
 				B87377321CFA70AD002A5E25 /* Main.storyboard in Resources */,
 			);
@@ -215,6 +232,7 @@
 			files = (
 				B873772C1CFA70AD002A5E25 /* AppDelegate.m in Sources */,
 				B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */,
+				B8BF83ED1D56EB1A0053E9A5 /* HPropertyVC.m in Sources */,
 				B87377291CFA70AD002A5E25 /* main.m in Sources */,
 				B87184F61D0E980F004D464D /* HConstController.m in Sources */,
 				B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */,
