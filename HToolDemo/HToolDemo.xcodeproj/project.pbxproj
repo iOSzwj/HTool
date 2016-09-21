@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B857F8A61D9231F00079209B /* HCollectionViewCircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F89F1D9231F00079209B /* HCollectionViewCircleLayout.m */; };
+		B857F8A71D9231F00079209B /* HCollectionViewFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F8A11D9231F00079209B /* HCollectionViewFallLayout.m */; };
+		B857F8A81D9231F00079209B /* HCollectionViewLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F8A31D9231F00079209B /* HCollectionViewLineLayout.m */; };
+		B857F8A91D9231F00079209B /* HCollectionViewStackLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F8A51D9231F00079209B /* HCollectionViewStackLayout.m */; };
+		B857F8AD1D9233780079209B /* HCollectionViewLayoutDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F8AC1D9233780079209B /* HCollectionViewLayoutDemo.m */; };
 		B87184F61D0E980F004D464D /* HConstController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87184F51D0E980F004D464D /* HConstController.m */; };
 		B87184F91D0E98D4004D464D /* HConstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B87184F81D0E98D4004D464D /* HConstCell.m */; };
 		B87377291CFA70AD002A5E25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B87377281CFA70AD002A5E25 /* main.m */; };
@@ -24,6 +29,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B857F89E1D9231F00079209B /* HCollectionViewCircleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewCircleLayout.h; sourceTree = "<group>"; };
+		B857F89F1D9231F00079209B /* HCollectionViewCircleLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCollectionViewCircleLayout.m; sourceTree = "<group>"; };
+		B857F8A01D9231F00079209B /* HCollectionViewFallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewFallLayout.h; sourceTree = "<group>"; };
+		B857F8A11D9231F00079209B /* HCollectionViewFallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCollectionViewFallLayout.m; sourceTree = "<group>"; };
+		B857F8A21D9231F00079209B /* HCollectionViewLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewLineLayout.h; sourceTree = "<group>"; };
+		B857F8A31D9231F00079209B /* HCollectionViewLineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCollectionViewLineLayout.m; sourceTree = "<group>"; };
+		B857F8A41D9231F00079209B /* HCollectionViewStackLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewStackLayout.h; sourceTree = "<group>"; };
+		B857F8A51D9231F00079209B /* HCollectionViewStackLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCollectionViewStackLayout.m; sourceTree = "<group>"; };
+		B857F8AB1D9233780079209B /* HCollectionViewLayoutDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewLayoutDemo.h; sourceTree = "<group>"; };
+		B857F8AC1D9233780079209B /* HCollectionViewLayoutDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCollectionViewLayoutDemo.m; sourceTree = "<group>"; };
 		B87184F41D0E980F004D464D /* HConstController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HConstController.h; sourceTree = "<group>"; };
 		B87184F51D0E980F004D464D /* HConstController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HConstController.m; sourceTree = "<group>"; };
 		B87184F71D0E98D4004D464D /* HConstCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HConstCell.h; sourceTree = "<group>"; };
@@ -62,9 +77,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B857F8AA1D9233520079209B /* HCollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				B857F8AB1D9233780079209B /* HCollectionViewLayoutDemo.h */,
+				B857F8AC1D9233780079209B /* HCollectionViewLayoutDemo.m */,
+			);
+			name = HCollectionViewLayout;
+			sourceTree = "<group>";
+		};
 		B87184F21D0E97EF004D464D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B857F8AA1D9233520079209B /* HCollectionViewLayout */,
 				B8BF83EA1D56EAFD0053E9A5 /* HProperty */,
 				B87C4F971D55C6120066BBFF /* HDate */,
 				B87184F31D0E97EF004D464D /* HConst */,
@@ -127,6 +152,14 @@
 		B873773E1CFA70D3002A5E25 /* HTool */ = {
 			isa = PBXGroup;
 			children = (
+				B857F89E1D9231F00079209B /* HCollectionViewCircleLayout.h */,
+				B857F89F1D9231F00079209B /* HCollectionViewCircleLayout.m */,
+				B857F8A01D9231F00079209B /* HCollectionViewFallLayout.h */,
+				B857F8A11D9231F00079209B /* HCollectionViewFallLayout.m */,
+				B857F8A21D9231F00079209B /* HCollectionViewLineLayout.h */,
+				B857F8A31D9231F00079209B /* HCollectionViewLineLayout.m */,
+				B857F8A41D9231F00079209B /* HCollectionViewStackLayout.h */,
+				B857F8A51D9231F00079209B /* HCollectionViewStackLayout.m */,
 				B873773F1CFA70D3002A5E25 /* Foundation+Log.m */,
 				B87377401CFA70D3002A5E25 /* HConst.h */,
 				B87377411CFA70D3002A5E25 /* HPropertyTool.h */,
@@ -184,11 +217,12 @@
 		B873771C1CFA70AD002A5E25 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = hare27;
 				TargetAttributes = {
 					B87377231CFA70AD002A5E25 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PBCZXCK2TK;
 					};
 				};
 			};
@@ -230,11 +264,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B857F8A61D9231F00079209B /* HCollectionViewCircleLayout.m in Sources */,
 				B873772C1CFA70AD002A5E25 /* AppDelegate.m in Sources */,
 				B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */,
 				B8BF83ED1D56EB1A0053E9A5 /* HPropertyVC.m in Sources */,
+				B857F8A81D9231F00079209B /* HCollectionViewLineLayout.m in Sources */,
 				B87377291CFA70AD002A5E25 /* main.m in Sources */,
 				B87184F61D0E980F004D464D /* HConstController.m in Sources */,
+				B857F8AD1D9233780079209B /* HCollectionViewLayoutDemo.m in Sources */,
+				B857F8A91D9231F00079209B /* HCollectionViewStackLayout.m in Sources */,
+				B857F8A71D9231F00079209B /* HCollectionViewFallLayout.m in Sources */,
 				B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */,
 				B87184F91D0E98D4004D464D /* HConstCell.m in Sources */,
 				B87377441CFA70D3002A5E25 /* Foundation+Log.m in Sources */,
@@ -278,8 +317,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -323,8 +364,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -352,6 +395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PBCZXCK2TK;
 				INFOPLIST_FILE = HToolDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hare27.com.HToolDemo;
@@ -363,6 +407,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PBCZXCK2TK;
 				INFOPLIST_FILE = HToolDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hare27.com.HToolDemo;
