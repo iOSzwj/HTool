@@ -25,11 +25,21 @@
 
 @implementation HPropertyTool
 
-#pragma mark - 方法 Methods
+#pragma mark - 主方法
 
 /** 讲字典转换成用于创建文件的字符串，并打印出来*/
-+(void)logPropertyForDict:(NSDictionary *)dict{
-    NSLog(@"%@",[[self new] getPropertyString:dict className:nil]);
++(void)logPropertyForDict:(id)json{
+    
+    HPropertyTool *tool = [HPropertyTool new];
+    
+    // 获取json中的所有dict
+    [tool getAllDictForJson:json];
+    
+    [tool.dict_all enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSMutableDictionary * _Nonnull dict, BOOL * _Nonnull stop) {
+        NSLog(@"%@",[tool getPropertyString:dict  className:key.uppercaseString]);
+    }];
+    
+    
     
 }
 
@@ -39,27 +49,36 @@
     [self getFileForJson:json toFile:kLocationPath];
     
 }
-
 +(void)getFileForJson:(id)json toFile:(NSString *)filePath{
     
     HPropertyTool *tool = [HPropertyTool new];
     
-    // 如果是字典
-    if ([json isKindOfClass:[NSDictionary class]]) {
-        [tool addDictToAll:json andKey:@"index"];
-        // 如果是数组
-    }else if ([json isKindOfClass:[NSArray class]]){
-        [tool addArrToAll:json andKey:@"index"];
-    }else{
-        return;
-    }
+    // 获取json中的所有dict
+    [tool getAllDictForJson:json];
+    
     // 保存到本地
     [tool saveDict:tool.dict_all ToPath:filePath];
     // 再将json保存到本地
-    if ([json writeToFile:[kLocationPath stringByAppendingPathComponent:@"json.plist"] atomically:YES]) {
+    if ([json writeToFile:[filePath stringByAppendingPathComponent:@"json.plist"] atomically:YES]) {
         NSLog(@"%s json文件写入成功",__func__);
     }
     
+}
+
+#pragma mark - 实例方法
+
+/** 获取json中的所有dict*/
+-(void)getAllDictForJson:(id)json{
+    
+    // 如果是字典
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        [self addDictToAll:json andKey:@"index"];
+        // 如果是数组
+    }else if ([json isKindOfClass:[NSArray class]]){
+        [self addArrToAll:json andKey:@"index"];
+    }else{
+        return;
+    }
 }
 
 /** 添加一个字典到self.dict_all*/
@@ -149,30 +168,6 @@
 }
 
 
-/** 判断一个对象是否是字典类型*/
--(BOOL)isDictForJson:(id)json{
-    if ([json isKindOfClass:[NSDictionary class]]) {
-        return YES;
-    }else if ([json isKindOfClass:NSClassFromString(@"__NSCFDictionary")]){
-        return YES;
-    }
-    return NO;
-}
-
-/** 判断一个对象是否是数组类型*/
--(BOOL)isArrForJson:(id)json{
-    if ([json isKindOfClass:[NSArray class]]) {
-        return YES;
-    }else if ([json isKindOfClass:NSClassFromString(@"__NSArrayM")]){
-        return YES;
-    }else if ([json isKindOfClass:NSClassFromString(@"__NSArray0")]){
-        return YES;
-    }else if ([json isKindOfClass:NSClassFromString(@"__NSCFArray")]){
-        return YES;
-    }
-    return NO;
-}
-
 /** 讲字典转换成用于创建.h文件的字符串*/
 -(NSString *)getPropertyString:(NSDictionary *)dict className:(NSString *)className{
     // 打印所有属性类型名
@@ -187,7 +182,7 @@
     //    __NSCFNumber,
     //    __NSCFString
     
-    NSMutableString *propertyString = [NSMutableString stringWithFormat:@"@interface %@ : NSObject\n",className.uppercaseFirstChar];
+    NSMutableString *propertyString = [NSMutableString stringWithFormat:@"\n@interface %@ : NSObject\n",className.uppercaseFirstChar];
     
     [dict enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
@@ -258,6 +253,31 @@
         [self.classNameSet addObject:[json class]];
     }
     
+}
+
+#pragma mark - 判断
+/** 判断一个对象是否是字典类型*/
+-(BOOL)isDictForJson:(id)json{
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        return YES;
+    }else if ([json isKindOfClass:NSClassFromString(@"__NSCFDictionary")]){
+        return YES;
+    }
+    return NO;
+}
+
+/** 判断一个对象是否是数组类型*/
+-(BOOL)isArrForJson:(id)json{
+    if ([json isKindOfClass:[NSArray class]]) {
+        return YES;
+    }else if ([json isKindOfClass:NSClassFromString(@"__NSArrayM")]){
+        return YES;
+    }else if ([json isKindOfClass:NSClassFromString(@"__NSArray0")]){
+        return YES;
+    }else if ([json isKindOfClass:NSClassFromString(@"__NSCFArray")]){
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - 懒加载 Lazy Load

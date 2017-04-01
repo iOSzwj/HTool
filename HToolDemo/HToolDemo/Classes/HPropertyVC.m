@@ -24,10 +24,10 @@
     // 默认路径
 //    [HPropertyTool getFileForJson:dictionary];
     // 传入路径
-    [HPropertyTool getFileForJson:dictionary toFile:@"/Users/hare/Desktop/modelDirectory"];
+//    [HPropertyTool getFileForJson:dictionary toFile:@"/Users/hare/Desktop/modelDirectory"];
     
     // 打印模型内容
-//    [HPropertyTool logPropertyForDict:dictionary];
+    [HPropertyTool logPropertyForDict:dictionary];
     
     
     
