@@ -20,20 +20,25 @@
 #define HLog(...)
 #endif
 
+/** 随机整数*/
+/** [0,x)*/
+#define HRandInt(x) (arc4random()%x)
+/** [0,256)*/
+#define HRand256 HRandInt(256)
+
 /** rgb颜色*/
 #define HRGBColor(r, g, b) HRGBAColor(r, g, b, 255)
 #define HRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
 
 /** 随机色*/
-#define HRandColor HRGBAColor(arc4random()%256, arc4random()%256, arc4random()%256, arc4random()%256)
+#define HRandColor HRGBAColor(HRand256, HRand256, HRand256, 255)
+#define HRandAColor HRGBAColor(HRand256, HRand256, HRand256, HRand256)
 
 /** 屏幕宽*/
 #define HScreenW [UIScreen mainScreen].bounds.size.width
 
 /** 屏幕高*/
 #define HScreenH [UIScreen mainScreen].bounds.size.height
-
-
 
 
 #endif
