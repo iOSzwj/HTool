@@ -11,19 +11,20 @@
 #define spacing 150
 #define InsetSpacing 50
 #define itemWidth 100
+#define itemHeight 200
 
 @implementation HCollectionViewLineLayout
 
 //准备工作完成的时候回调
 -(void)prepareLayout{
     //设置cell的大小
-    self.itemSize=CGSizeMake(itemWidth, itemWidth);
+    self.itemSize=CGSizeMake(itemWidth, itemHeight);
     //设置滚动的方向
     self.scrollDirection=UICollectionViewScrollDirectionHorizontal;
     //设置cell之间的间距
     self.minimumLineSpacing=spacing;
     //设置显示间距
-    self.sectionInset=UIEdgeInsetsMake(InsetSpacing, self.collectionView.frame.size.width/2-itemWidth/2, InsetSpacing, self.collectionView.frame.size.width/2);
+    self.sectionInset=UIEdgeInsetsMake(itemHeight, self.collectionView.frame.size.width/2-itemWidth/2, itemHeight, self.collectionView.frame.size.height/2);
 }
 
 //设置显示的边界发生改变的时候重新布局

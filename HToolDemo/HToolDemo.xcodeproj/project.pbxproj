@@ -28,12 +28,9 @@
 		B87377341CFA70AD002A5E25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87377331CFA70AD002A5E25 /* Assets.xcassets */; };
 		B87377371CFA70AD002A5E25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87377351CFA70AD002A5E25 /* LaunchScreen.storyboard */; };
 		B87377441CFA70D3002A5E25 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = B873773F1CFA70D3002A5E25 /* Foundation+Log.m */; };
-		B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B87377421CFA70D3002A5E25 /* HPropertyTool.m */; };
 		B87377471CFA71C3002A5E25 /* status.plist in Resources */ = {isa = PBXBuildFile; fileRef = B87377461CFA71C3002A5E25 /* status.plist */; };
 		B87C4F9A1D55C63E0066BBFF /* HDateTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C4F991D55C63E0066BBFF /* HDateTool.m */; };
 		B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */; };
-		B8BF83ED1D56EB1A0053E9A5 /* HPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BF83EC1D56EB1A0053E9A5 /* HPropertyVC.m */; };
-		B8BF83EF1D56EB400053E9A5 /* json.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8BF83EE1D56EB400053E9A5 /* json.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,17 +74,12 @@
 		B87377381CFA70AD002A5E25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B873773F1CFA70D3002A5E25 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		B87377401CFA70D3002A5E25 /* HConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HConst.h; sourceTree = "<group>"; };
-		B87377411CFA70D3002A5E25 /* HPropertyTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPropertyTool.h; sourceTree = "<group>"; };
-		B87377421CFA70D3002A5E25 /* HPropertyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPropertyTool.m; sourceTree = "<group>"; };
 		B87377431CFA70D3002A5E25 /* HSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSingleton.h; sourceTree = "<group>"; };
 		B87377461CFA71C3002A5E25 /* status.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = status.plist; sourceTree = "<group>"; };
 		B87C4F981D55C63E0066BBFF /* HDateTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDateTool.h; sourceTree = "<group>"; };
 		B87C4F991D55C63E0066BBFF /* HDateTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDateTool.m; sourceTree = "<group>"; };
 		B87C4F9B1D55C6A80066BBFF /* HDateDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDateDemo.h; sourceTree = "<group>"; };
 		B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDateDemo.m; sourceTree = "<group>"; };
-		B8BF83EB1D56EB1A0053E9A5 /* HPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPropertyVC.h; sourceTree = "<group>"; };
-		B8BF83EC1D56EB1A0053E9A5 /* HPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPropertyVC.m; sourceTree = "<group>"; };
-		B8BF83EE1D56EB400053E9A5 /* json.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = json.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				B857F8AA1D9233520079209B /* HCollectionViewLayout */,
-				B8BF83EA1D56EAFD0053E9A5 /* HProperty */,
 				B87C4F971D55C6120066BBFF /* HDate */,
 				B87184F31D0E97EF004D464D /* HConst */,
 			);
@@ -211,8 +202,6 @@
 				B857F8A51D9231F00079209B /* HCollectionViewStackLayout.m */,
 				B873773F1CFA70D3002A5E25 /* Foundation+Log.m */,
 				B87377401CFA70D3002A5E25 /* HConst.h */,
-				B87377411CFA70D3002A5E25 /* HPropertyTool.h */,
-				B87377421CFA70D3002A5E25 /* HPropertyTool.m */,
 				B87377431CFA70D3002A5E25 /* HSingleton.h */,
 				B87C4F981D55C63E0066BBFF /* HDateTool.h */,
 				B87C4F991D55C63E0066BBFF /* HDateTool.m */,
@@ -228,16 +217,6 @@
 				B87C4F9C1D55C6A80066BBFF /* HDateDemo.m */,
 			);
 			path = HDate;
-			sourceTree = "<group>";
-		};
-		B8BF83EA1D56EAFD0053E9A5 /* HProperty */ = {
-			isa = PBXGroup;
-			children = (
-				B8BF83EE1D56EB400053E9A5 /* json.plist */,
-				B8BF83EB1D56EB1A0053E9A5 /* HPropertyVC.h */,
-				B8BF83EC1D56EB1A0053E9A5 /* HPropertyVC.m */,
-			);
-			name = HProperty;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,7 +279,6 @@
 			files = (
 				B87377371CFA70AD002A5E25 /* LaunchScreen.storyboard in Resources */,
 				B87377341CFA70AD002A5E25 /* Assets.xcassets in Resources */,
-				B8BF83EF1D56EB400053E9A5 /* json.plist in Resources */,
 				B87377471CFA71C3002A5E25 /* status.plist in Resources */,
 				B87377321CFA70AD002A5E25 /* Main.storyboard in Resources */,
 			);
@@ -317,7 +295,6 @@
 				B873772C1CFA70AD002A5E25 /* AppDelegate.m in Sources */,
 				41837B411E8F3F3800BCE43A /* NSObject+KVO.m in Sources */,
 				B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */,
-				B8BF83ED1D56EB1A0053E9A5 /* HPropertyVC.m in Sources */,
 				41837B471E8F3F3800BCE43A /* NSString+QRCode.m in Sources */,
 				B857F8A81D9231F00079209B /* HCollectionViewLineLayout.m in Sources */,
 				41837B431E8F3F3800BCE43A /* NSString+file.m in Sources */,
@@ -326,7 +303,6 @@
 				B857F8AD1D9233780079209B /* HCollectionViewLayoutDemo.m in Sources */,
 				B857F8A91D9231F00079209B /* HCollectionViewStackLayout.m in Sources */,
 				B857F8A71D9231F00079209B /* HCollectionViewFallLayout.m in Sources */,
-				B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */,
 				41837B441E8F3F3800BCE43A /* NSString+Frame.m in Sources */,
 				B87184F91D0E98D4004D464D /* HConstCell.m in Sources */,
 				41837B481E8F3F3800BCE43A /* NSString+Sub.m in Sources */,
