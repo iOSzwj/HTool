@@ -22,12 +22,12 @@
     
     // 直接生成模型文件
     // 默认路径
-//    [HPropertyTool getFileForJson:dictionary];
+    [HPropertyTool getFileForJson:dictionary useMJ:YES];
     // 传入路径
-//    [HPropertyTool getFileForJson:dictionary toFile:@"/Users/hare/Desktop/modelDirectory"];
+//    [HPropertyTool getFileForJson:dictionary useMJ:NO toFile:@"/Users/hare/Desktop/modelDirectory"];
     
     // 打印模型内容
-    [HPropertyTool logPropertyForDict:dictionary];
+    [HPropertyTool logPropertyForJson:dictionary useMJ:YES];
     
     
     

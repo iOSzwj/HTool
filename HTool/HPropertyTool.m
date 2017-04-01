@@ -9,8 +9,23 @@
 #import "HPropertyTool.h"
 #import "NSString+Sub.h"
 
+
 #warning 使用前，先修改下这里的路径
 #define kLocationPath @"/Users/hare/Desktop/modelDirectory"
+
+// 用于保存一个模型类的.h和.m字符串
+@interface PropertyFile : NSObject
+
+@property(nonatomic,copy)NSString *hString;
+@property(nonatomic,copy)NSString *mString;
+
+@end
+
+@implementation PropertyFile
+@end
+
+
+
 
 @interface HPropertyTool()
 
@@ -20,6 +35,12 @@
 /** 保存json里面元素类型的集合*/
 @property(nonatomic,strong)NSMutableSet *classNameSet;
 
+/** 保存系统关键字的字典*/
+@property(nonatomic,strong)NSDictionary *systemKey;
+
+/** 使用使用MJExtension*/
+@property(nonatomic,assign)BOOL useMJ;
+
 @end
 
 
@@ -28,30 +49,29 @@
 #pragma mark - 主方法
 
 /** 讲字典转换成用于创建文件的字符串，并打印出来*/
-+(void)logPropertyForDict:(id)json{
++(void)logPropertyForJson:(id)json useMJ:(BOOL)useMJ{
     
-    HPropertyTool *tool = [HPropertyTool new];
+    HPropertyTool *tool = [self toolWithUseMJ:useMJ];
     
     // 获取json中的所有dict
     [tool getAllDictForJson:json];
     
     [tool.dict_all enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSMutableDictionary * _Nonnull dict, BOOL * _Nonnull stop) {
-        NSLog(@"%@",[tool getPropertyString:dict  className:key.uppercaseString]);
+        PropertyFile *pf = [tool getPropertyString:dict  className:key.uppercaseFirstChar];
+        NSLog(@"%@\n%@",pf.hString,pf.mString);
     }];
-    
-    
     
 }
 
 /** 生成json的.h文件*/
-+(void)getFileForJson:(id)json{
++(void)getFileForJson:(id)json useMJ:(BOOL)useMJ{
     
-    [self getFileForJson:json toFile:kLocationPath];
+    [self getFileForJson:json useMJ:useMJ toFile:kLocationPath];
     
 }
-+(void)getFileForJson:(id)json toFile:(NSString *)filePath{
++(void)getFileForJson:(id)json useMJ:(BOOL)useMJ toFile:(NSString *)filePath{
     
-    HPropertyTool *tool = [HPropertyTool new];
+    HPropertyTool *tool = [self toolWithUseMJ:useMJ];
     
     // 获取json中的所有dict
     [tool getAllDictForJson:json];
@@ -63,6 +83,21 @@
         NSLog(@"%s json文件写入成功",__func__);
     }
     
+}
+
+#pragma mark - 初始化/工厂
+
++ (instancetype)toolWithUseMJ:(BOOL)useMJ{
+    return [[self alloc]initWithUseMJ:useMJ];
+}
+
+- (instancetype)initWithUseMJ:(BOOL)useMJ
+{
+    self = [super init];
+    if (self) {
+        self.useMJ = useMJ;
+    }
+    return self;
 }
 
 #pragma mark - 实例方法
@@ -155,12 +190,21 @@
         }
         
         // 写到文件中
-        NSString *propertyString = [self getPropertyString:obj className:key];
-        [propertyString writeToFile:[NSString stringWithFormat:@"%@/%@.h",path,key] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        PropertyFile *pf = [self getPropertyString:obj className:key];
+        BOOL isSucc = YES;
+        [pf.hString writeToFile:[NSString stringWithFormat:@"%@/%@.h",path,key] atomically:YES encoding:NSUTF8StringEncoding error:&error];
         if (error) {
-            NSLog(@"%@写入失败:%@ %@",key,error,error.userInfo);
-        }else{
-            count ++;
+            NSLog(@"%@的.h文件写入失败:%@ %@",key,error,error.userInfo);
+            isSucc = NO;
+        }
+        
+        [pf.mString writeToFile:[NSString stringWithFormat:@"%@/%@.m",path,key] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        if (error) {
+            NSLog(@"%@的.m文件写入失败:%@ %@",key,error,error.userInfo);
+            isSucc = NO;
+        }
+        if (isSucc) {
+            count++;
         }
     }];
     
@@ -169,7 +213,11 @@
 
 
 /** 讲字典转换成用于创建.h文件的字符串*/
--(NSString *)getPropertyString:(NSDictionary *)dict className:(NSString *)className{
+-(PropertyFile *)getPropertyString:(NSDictionary *)dict className:(NSString *)className{
+    
+    // 保存模型文件字符串的模型类
+    PropertyFile *pf = [PropertyFile new];
+    
     // 打印所有属性类型名
     //    [propertyM getClassNameForJson:dict];
     //    NSLog(@"%@",propertyM.classNameSet);
@@ -182,50 +230,121 @@
     //    __NSCFNumber,
     //    __NSCFString
     
+    // 保存数组的属性名和需要重命名的属性名数组
+    NSMutableDictionary *renameDic = nil;
+    NSMutableDictionary *arrNames = nil;
+    
+    if (self.useMJ) {
+        renameDic = [NSMutableDictionary dictionary];
+        arrNames = [NSMutableDictionary dictionary];
+    }
+    
+    // 生成.h文件的字符串
     NSMutableString *propertyString = [NSMutableString stringWithFormat:@"\n@interface %@ : NSObject\n",className.uppercaseFirstChar];
     
     [dict enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
-        NSString *type;
-        NSString *className;
+        NSString *type = nil;
+        NSString *propertyClass = nil;
         
         if ([self isDictForJson:obj]) {
             type = @"strong";
-            className = key.uppercaseFirstChar;
+            propertyClass = key.uppercaseFirstChar;
         }else if ([self isArrForJson:obj]){
+            
+            if (self.useMJ) {
+                arrNames[key] = key.uppercaseFirstChar;
+            }
+            
             type = @"strong";
-            className = [@"NSArray" stringByAppendingFormat:@"<%@*>",key.uppercaseFirstChar];
+            propertyClass = [@"NSArray" stringByAppendingFormat:@"<%@*>",key.uppercaseFirstChar];
             key=[key stringByAppendingString:@"s"];
             
             
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFNumber")]){
             type = @"assign";
-            className = @"int";
+            propertyClass = @"int";
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFString")]){
             type = @"copy";
-            className = @"NSString";
+            propertyClass = @"NSString";
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFBoolean")]){
             type = @"assign";
-            className = @"BOOL";
+            propertyClass = @"BOOL";
         }else if ([obj isKindOfClass:NSClassFromString(@"NSTaggedPointerString")]){
             type = @"copy";
-            className = @"NSString";
+            propertyClass = @"NSString";
         }else{
             NSLog(@"出现了未知类型%@",[obj class]);
             NSAssert1(0, @"出现了未知类型%@",[obj class]);
         }
         
+        // 保存出现过的关键字到字典
+        if (self.systemKey[key]) {
+            renameDic[key] = self.systemKey[key];
+            key = self.systemKey[key];
+        }
+        
         if ([type isEqualToString:@"assign"]) {
-            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ %@;\n",type,className,key];
+            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ %@;\n",type,propertyClass,key];
         }else{
-            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ *%@;\n",type,className,key];
+            [propertyString appendFormat:@"\n@property (nonatomic ,%@) %@ *%@;\n",type,propertyClass,key];
         }
         
     }];
     
     [propertyString appendString:@"\n@end\n"];
+    pf.hString = [propertyString copy];
     
-    return  [propertyString copy];
+    
+    // 生成.m文件的字符串
+    if (self.useMJ) {
+        
+        NSMutableString *mString = [NSMutableString stringWithFormat:@"\n@implementation %@",className.uppercaseFirstChar];
+        
+        // 属性有重命名的
+        if (renameDic.allKeys.count) {
+            
+            [mString appendString:@"\n\n+ (NSDictionary *)replacedKeyFromPropertyName{"];
+            [mString appendString:@"\n\n\treturn @{"];
+            
+            [renameDic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
+                
+                [mString appendFormat:@"@\"%@\":@\"%@\",",key,obj];
+            }];
+            
+            // 去掉最后一个‘,’号
+            [mString deleteCharactersInRange:NSMakeRange(mString.length-1, 1)];
+            [mString appendString:@"};"];
+            [mString appendString:@"\n\n}\n"];
+        }
+        
+        // 设置数组中的元素类型
+        if (arrNames.allKeys.count) {
+            
+            [mString appendString:@"\n\n+ (NSDictionary *)objectClassInArray{"];
+            [mString appendString:@"\n\n\treturn @{"];
+            
+            [arrNames enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
+                
+                [mString appendFormat:@"@\"%@\":[%@ class],",key,obj];
+            }];
+            
+            // 去掉最后一个‘,’号
+            [mString deleteCharactersInRange:NSMakeRange(mString.length-1, 1)];
+            [mString appendString:@"};"];
+            [mString appendString:@"\n\n}\n"];
+            
+        }
+        
+        [mString appendString:@"\n@end"];
+        pf.mString = [mString copy];
+        
+    }else{
+        pf.mString = [NSString stringWithFormat:@"\n@implementation %@\n@end",className.uppercaseFirstChar];
+        
+    }
+    
+    return pf;
     
 }
 
@@ -296,4 +415,18 @@
     return _dict_all;
 }
 
+-(NSDictionary *)systemKey{
+    
+    if (_systemKey == nil) {
+        _systemKey = @{
+                       @"id":@"ID",
+                       @"description":@"desc",
+                       };
+    }
+    return _systemKey;
+}
+
 @end
+
+
+
