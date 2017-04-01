@@ -7,9 +7,10 @@
 //
 
 #import "HPropertyTool.h"
+#import "NSString+Sub.h"
 
 #warning 使用前，先修改下这里的路径
-#define kLocationPath @"/Users/hare27/Desktop/propertyFile"
+#define kLocationPath @"/Users/hare/Desktop/modelDirectory"
 
 @interface HPropertyTool()
 
@@ -35,6 +36,12 @@
 /** 生成json的.h文件*/
 +(void)getFileForJson:(id)json{
     
+    [self getFileForJson:json toFile:kLocationPath];
+    
+}
+
++(void)getFileForJson:(id)json toFile:(NSString *)filePath{
+    
     HPropertyTool *tool = [HPropertyTool new];
     
     // 如果是字典
@@ -47,7 +54,7 @@
         return;
     }
     // 保存到本地
-    [tool saveDict:tool.dict_all ToPath:kLocationPath];
+    [tool saveDict:tool.dict_all ToPath:filePath];
     // 再将json保存到本地
     if ([json writeToFile:[kLocationPath stringByAppendingPathComponent:@"json.plist"] atomically:YES]) {
         NSLog(@"%s json文件写入成功",__func__);
@@ -180,19 +187,22 @@
     //    __NSCFNumber,
     //    __NSCFString
     
-    NSMutableString *propertyString = [NSMutableString stringWithFormat:@"@interface %@ : NSObject\n",className];
+    NSMutableString *propertyString = [NSMutableString stringWithFormat:@"@interface %@ : NSObject\n",className.uppercaseFirstChar];
     
-    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+    [dict enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
         NSString *type;
         NSString *className;
         
         if ([self isDictForJson:obj]) {
             type = @"strong";
-            className = @"NSDictionary";
+            className = key.uppercaseFirstChar;
         }else if ([self isArrForJson:obj]){
             type = @"strong";
-            className = @"NSArray";
+            className = [@"NSArray" stringByAppendingFormat:@"<%@*>",key.uppercaseFirstChar];
+            key=[key stringByAppendingString:@"s"];
+            
+            
         }else if ([obj isKindOfClass:NSClassFromString(@"__NSCFNumber")]){
             type = @"assign";
             className = @"int";

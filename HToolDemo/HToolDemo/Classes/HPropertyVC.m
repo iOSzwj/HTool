@@ -20,7 +20,16 @@
     
     NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"json.plist" ofType:nil]];
     
-    [HPropertyTool getFileForJson:dictionary];
+    // 直接生成模型文件
+    // 默认路径
+//    [HPropertyTool getFileForJson:dictionary];
+    // 传入路径
+    [HPropertyTool getFileForJson:dictionary toFile:@"/Users/hare/Desktop/modelDirectory"];
+    
+    // 打印模型内容
+//    [HPropertyTool logPropertyForDict:dictionary];
+    
+    
     
     // Do any additional setup after loading the view.
 }

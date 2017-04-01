@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41837B411E8F3F3800BCE43A /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B321E8F3F3800BCE43A /* NSObject+KVO.m */; };
+		41837B421E8F3F3800BCE43A /* NSObject+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B341E8F3F3800BCE43A /* NSObject+Model.m */; };
+		41837B431E8F3F3800BCE43A /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B361E8F3F3800BCE43A /* NSString+file.m */; };
+		41837B441E8F3F3800BCE43A /* NSString+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B381E8F3F3800BCE43A /* NSString+Frame.m */; };
+		41837B451E8F3F3800BCE43A /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B3A1E8F3F3800BCE43A /* NSString+Hash.m */; };
+		41837B461E8F3F3800BCE43A /* NSString+Legal.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B3C1E8F3F3800BCE43A /* NSString+Legal.m */; };
+		41837B471E8F3F3800BCE43A /* NSString+QRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B3E1E8F3F3800BCE43A /* NSString+QRCode.m */; };
+		41837B481E8F3F3800BCE43A /* NSString+Sub.m in Sources */ = {isa = PBXBuildFile; fileRef = 41837B401E8F3F3800BCE43A /* NSString+Sub.m */; };
 		B857F8A61D9231F00079209B /* HCollectionViewCircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F89F1D9231F00079209B /* HCollectionViewCircleLayout.m */; };
 		B857F8A71D9231F00079209B /* HCollectionViewFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F8A11D9231F00079209B /* HCollectionViewFallLayout.m */; };
 		B857F8A81D9231F00079209B /* HCollectionViewLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B857F8A31D9231F00079209B /* HCollectionViewLineLayout.m */; };
@@ -29,6 +37,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41837B311E8F3F3800BCE43A /* NSObject+KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVO.h"; sourceTree = "<group>"; };
+		41837B321E8F3F3800BCE43A /* NSObject+KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVO.m"; sourceTree = "<group>"; };
+		41837B331E8F3F3800BCE43A /* NSObject+Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Model.h"; sourceTree = "<group>"; };
+		41837B341E8F3F3800BCE43A /* NSObject+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Model.m"; sourceTree = "<group>"; };
+		41837B351E8F3F3800BCE43A /* NSString+file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+file.h"; sourceTree = "<group>"; };
+		41837B361E8F3F3800BCE43A /* NSString+file.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+file.m"; sourceTree = "<group>"; };
+		41837B371E8F3F3800BCE43A /* NSString+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Frame.h"; sourceTree = "<group>"; };
+		41837B381E8F3F3800BCE43A /* NSString+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Frame.m"; sourceTree = "<group>"; };
+		41837B391E8F3F3800BCE43A /* NSString+Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hash.h"; sourceTree = "<group>"; };
+		41837B3A1E8F3F3800BCE43A /* NSString+Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hash.m"; sourceTree = "<group>"; };
+		41837B3B1E8F3F3800BCE43A /* NSString+Legal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Legal.h"; sourceTree = "<group>"; };
+		41837B3C1E8F3F3800BCE43A /* NSString+Legal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Legal.m"; sourceTree = "<group>"; };
+		41837B3D1E8F3F3800BCE43A /* NSString+QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QRCode.h"; sourceTree = "<group>"; };
+		41837B3E1E8F3F3800BCE43A /* NSString+QRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QRCode.m"; sourceTree = "<group>"; };
+		41837B3F1E8F3F3800BCE43A /* NSString+Sub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Sub.h"; sourceTree = "<group>"; };
+		41837B401E8F3F3800BCE43A /* NSString+Sub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Sub.m"; sourceTree = "<group>"; };
 		B857F89E1D9231F00079209B /* HCollectionViewCircleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewCircleLayout.h; sourceTree = "<group>"; };
 		B857F89F1D9231F00079209B /* HCollectionViewCircleLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCollectionViewCircleLayout.m; sourceTree = "<group>"; };
 		B857F8A01D9231F00079209B /* HCollectionViewFallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCollectionViewFallLayout.h; sourceTree = "<group>"; };
@@ -77,6 +101,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41837B301E8F3F3800BCE43A /* HFoundationCategory */ = {
+			isa = PBXGroup;
+			children = (
+				41837B311E8F3F3800BCE43A /* NSObject+KVO.h */,
+				41837B321E8F3F3800BCE43A /* NSObject+KVO.m */,
+				41837B331E8F3F3800BCE43A /* NSObject+Model.h */,
+				41837B341E8F3F3800BCE43A /* NSObject+Model.m */,
+				41837B351E8F3F3800BCE43A /* NSString+file.h */,
+				41837B361E8F3F3800BCE43A /* NSString+file.m */,
+				41837B371E8F3F3800BCE43A /* NSString+Frame.h */,
+				41837B381E8F3F3800BCE43A /* NSString+Frame.m */,
+				41837B391E8F3F3800BCE43A /* NSString+Hash.h */,
+				41837B3A1E8F3F3800BCE43A /* NSString+Hash.m */,
+				41837B3B1E8F3F3800BCE43A /* NSString+Legal.h */,
+				41837B3C1E8F3F3800BCE43A /* NSString+Legal.m */,
+				41837B3D1E8F3F3800BCE43A /* NSString+QRCode.h */,
+				41837B3E1E8F3F3800BCE43A /* NSString+QRCode.m */,
+				41837B3F1E8F3F3800BCE43A /* NSString+Sub.h */,
+				41837B401E8F3F3800BCE43A /* NSString+Sub.m */,
+			);
+			name = HFoundationCategory;
+			path = ../../../HFoundationCategory/HFoundationCategory;
+			sourceTree = "<group>";
+		};
 		B857F8AA1D9233520079209B /* HCollectionViewLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +175,7 @@
 		B87377261CFA70AD002A5E25 /* HToolDemo */ = {
 			isa = PBXGroup;
 			children = (
+				41837B301E8F3F3800BCE43A /* HFoundationCategory */,
 				B873773E1CFA70D3002A5E25 /* HTool */,
 				B87184F21D0E97EF004D464D /* Classes */,
 				B873772A1CFA70AD002A5E25 /* AppDelegate.h */,
@@ -266,18 +315,26 @@
 			files = (
 				B857F8A61D9231F00079209B /* HCollectionViewCircleLayout.m in Sources */,
 				B873772C1CFA70AD002A5E25 /* AppDelegate.m in Sources */,
+				41837B411E8F3F3800BCE43A /* NSObject+KVO.m in Sources */,
 				B87C4F9D1D55C6A80066BBFF /* HDateDemo.m in Sources */,
 				B8BF83ED1D56EB1A0053E9A5 /* HPropertyVC.m in Sources */,
+				41837B471E8F3F3800BCE43A /* NSString+QRCode.m in Sources */,
 				B857F8A81D9231F00079209B /* HCollectionViewLineLayout.m in Sources */,
+				41837B431E8F3F3800BCE43A /* NSString+file.m in Sources */,
 				B87377291CFA70AD002A5E25 /* main.m in Sources */,
 				B87184F61D0E980F004D464D /* HConstController.m in Sources */,
 				B857F8AD1D9233780079209B /* HCollectionViewLayoutDemo.m in Sources */,
 				B857F8A91D9231F00079209B /* HCollectionViewStackLayout.m in Sources */,
 				B857F8A71D9231F00079209B /* HCollectionViewFallLayout.m in Sources */,
 				B87377451CFA70D3002A5E25 /* HPropertyTool.m in Sources */,
+				41837B441E8F3F3800BCE43A /* NSString+Frame.m in Sources */,
 				B87184F91D0E98D4004D464D /* HConstCell.m in Sources */,
+				41837B481E8F3F3800BCE43A /* NSString+Sub.m in Sources */,
+				41837B461E8F3F3800BCE43A /* NSString+Legal.m in Sources */,
 				B87377441CFA70D3002A5E25 /* Foundation+Log.m in Sources */,
 				B87C4F9A1D55C63E0066BBFF /* HDateTool.m in Sources */,
+				41837B451E8F3F3800BCE43A /* NSString+Hash.m in Sources */,
+				41837B421E8F3F3800BCE43A /* NSObject+Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

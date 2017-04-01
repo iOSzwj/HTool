@@ -15,5 +15,6 @@
 
 /** 生成json的.h文件*/
 +(void)getFileForJson:(id)json;
++(void)getFileForJson:(id)json toFile:(NSString *)filePath;
 
 @end
