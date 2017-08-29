@@ -20,6 +20,8 @@
 #define HLog(...)
 #endif
 
+#define ud [NSUserDefaults standardUserDefaults]
+
 /** 随机整数*/
 /** [0,x)*/
 #define HRandInt(x) (arc4random()%x)
